@@ -313,16 +313,17 @@ MidJourneyのファウンダーはLEAPのファウンダーでもあるので、
 Dream Studio 各パラメータはどのような意味を持つのでしょうか。
 Cfg Scaleを最大値20（=揺らぎなし） にして、Stepsを最小の 10 から、デフォルトの 50, 最大の 150に変化して、2種類のプロンプトで観察したいと思います。
 
- * 「A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ」(起動時のデフォルト))
- * 「Dancing Hatsune Miku in Minecraft Trending on pixiv HQ」
+ * 【Galaxy】「A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ」(起動時のデフォルト))
+ * 【Miku】「Dancing Hatsune Miku in Minecraft Trending on pixiv HQ」
  
-//image[StableDiffusion_Params][Dream Studio : Steps のみ変更して画像の違いを確認する]{
+//image[StableDiffusion_Params][Dream Studio : Steps のみ変更して画像の違いを確認（上：Galaxy／下：Miku）]{
 //}
 
 他は全て同じパラメータ, Seed = 1457915964。
-【ギャラクシー】Stepsが増えると細部の描写が細かくなる。画の派手さ（星の輝き）は減る、脚の本数や山の描写は謎。
 
-【ミク】Stepsが少なすぎるとボケ過ぎ。右上のハートはなぜ生まれたのか?
+ * 【Galaxy】Stepsが増えると細部の描写が細かくなる。画の派手さ（星の輝き）は減る、脚の本数や山の描写は謎。
+
+ * 【Miku】Stepsが少なすぎるとボケ過ぎ。右上のハートはなぜ生まれたのか?
 
 
 //image[StableDiffusion_Samplers][Dream Studio : サンプラーの変更は目立った違いはなさそう]{
