@@ -95,7 +95,14 @@ end
 //cmd{
 $ rspec
 $ tail -1 ./coverage/simplecov.log
-  {"covered_percent":100.0,"never_lines":9,"lines_of_code":5,"covered_lines":5,"missed_lines":0,"time":1660003200}
+{
+	"covered_percent":100.0,
+	"never_lines":9,
+	"lines_of_code":5,
+	"covered_lines":5,
+	"missed_lines":0,
+	"time":1660003200
+}
 //}
 
 
@@ -131,7 +138,13 @@ GitHubでPull Requestを作ると、GitHub Actionsでテストが回るように
 まず、BigQueryへの編集権限のあるサービスアカウントを作成します。
 それをGitHubに設定して、Actionsからsecrets.GCP_SERVICE_ACCOUNTで取得できるようにします。
 
+GitHubの対象リポジトリを表示し、Settingタブをクリックします。
+@<img>{higuchi_01}が表示されるので、左メニューからSecrets/Actionsをクリックします。
+
 //indepimage[higuchi_01]
+
+@<img>{higuchi_02}が表示されるので、NameにGCP_SERVICE_ACCOUNT、Valueに発行したサービスアカウントを貼り付けます。
+
 //indepimage[higuchi_02]
 
 次にActionsの設定ファイルを変更します。
@@ -152,7 +165,8 @@ GitHubでPull Requestを作ると、GitHub Actionsでテストが回るように
 
   - name: send coverage to BigQuery
     run: |
-      bq load --source_format NEWLINE_DELIMITED_JSON aumo_media.simplecov tea-app/coverage/simplecov.log
+      bq load --source_format NEWLINE_DELIMITED_JSON \
+				aumo_media.simplecov tea-app/coverage/simplecov.log
 //}
 
 この変更を含んだPull Requestを作ると、GitHub Actionsが実行され、BigQueryにカバレッジデータが格納されます。
