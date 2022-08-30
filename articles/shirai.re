@@ -236,9 +236,11 @@ Stable Diffusion は 64x64 のガウスノイズの潜在変数シード(Latent 
 なお与えた単語の意味をベクトルで保有していますのでWord2Vecのように単語間の類似や加算減算なども可能なようです（言語で指定することは難しいが）。
 
 
+論文「High-Resolution Image Synthesis with Latent Diffusion Models」（https://arxiv.org/abs/2112.10752）や、利用のためのライセンスなどは後ほど Google Colaboratory での利用において解説します。
+
+
 // ジェネレーティブAI開発者のKatherine Crowson氏による条件付き拡散モデル（conditional diffusion models）、
 // Open AIによるDall-E 2、Google BrainによるImagen、その他多くの洞察と組み合わせて構築されたもので、任意のテキスト入力から写真のようにリアルまたはアーティスティックな画像を生成することができます。
-// * High-Resolution Image Synthesis with Latent Diffusion Models (https://arxiv.org/abs/2112.10752)
 // 画像の一部を塗りつぶしてテキスト入力すると、その箇所だけテキスト通りに描き加えることができます。
 // しかも、描き加えたその箇所は、周囲の文脈のスタイルや照明に応じた影や反射を含み、周囲と調和した画像が合成されて生成されます。
 
@@ -326,9 +328,7 @@ MidJourneyのファウンダーはLEAPのファウンダーでもあるので、
 
 これはプロンプトの基本的な構成要素です。ほとんどの初心者は、生のプロンプトだけを使うことから始めますが、これは通常間違いです。
 このようにして生成された画像は、ランダムで無秩序になる傾向があるからです。以下は、私が以前のプロンプトを実行して生成した例です。
-
 ＜画像＞
-
 見てわかるように、これらの画像は風景が不規則で、とても美的センスがあるとは思えません。ここで、次のポイントに移ります。
 
 ==== 2. スタイル
@@ -346,48 +346,35 @@ MidJourneyのファウンダーはLEAPのファウンダーでもあるので、
 リアルな画像の場合、そのスタイルには様々な方法があり、ほとんどが似たような画像に仕上がります。
 ここでは、よく使われる写実的な画像にするためのテクニックを紹介します。
 
- 1. ある写真＋生のプロンプト「a photo of + raw prompt」，
- 2. フォトグラフ＋生のプロンプト「a photograph of + raw prompt」，
- 3. 生のプロンプト、ハイパーリアリスティック「raw prompt, hyperrealistic」，
- 4. 生のプロンプト、リアリスティック「raw prompt, realistic」，
+ 1. ある写真＋生のプロンプト「a photo of + raw prompt」
+ 2. フォトグラフ＋生のプロンプト「a photograph of + raw prompt」
+ 3. 生のプロンプト、ハイパーリアリスティック「raw prompt, hyperrealistic」
+ 4. 生のプロンプト、リアリスティック「raw prompt, realistic」
 
 もちろん、これらを組み合わせることで、よりリアルな画像を得ることができます。
 油絵を取得するには、プロンプトに「an oil painting of」を追加するだけです。
-この場合、フレーム内の油絵が表示されることがありますが、これを修正するには、プロンプトを再実行するか、生プロンプト + "油絵" 「“oil painting”」を使用することができます。
+この場合、フレーム内の油絵が表示されることがありますが、これを修正するには、プロンプトを再実行するか、生プロンプト + 油絵「oil painting」を使用することができます。
 鉛筆画を作成するには、生のプロンプトに「a pencil drawing of」を追加するか、生のプロンプト＋「pencil drawing」とするだけです。
 風景画の場合も同様です。
 
 ==== 3. アーティスト
 
 自分のスタイルをより具体的にしたり、イメージをより一貫したものにするために、プロンプトにアーティストの名前を使用することができます。
-例えば、非常に抽象的なイメージにしたい場合は、パブロ・ピカソ作「“made by Pablo Picasso” 」または単に ピカソ「“Picasso”」と付け加えるとよいでしょう。
+例えば、非常に抽象的なイメージにしたい場合は、「パブロ・ピカソ作」“made by Pablo Picasso” または単に ピカソ「Picasso」と付け加えるとよいでしょう。
 
 以下に、さまざまなスタイルのアーティストのリストを掲載しますが、新しいアートを発見するクールな方法として、常にさまざまなアーティストを検索することをお勧めします。
 
- * ポートレート
-John Singer Sargent, Edgar Degas, Paul Cézanne, Jan van Eyck
-
- * 油絵
-
-Leonardo DaVinci, Vincent Van Gogh, Johannes Vermeer, Rembrandt
-
-レオナルド・ダヴィンチ
-
- * 鉛筆・ペン画
-
-Albrecht Dürer, Leonardo da Vinci, Michelangelo, Jean-Auguste-Dominique Ingres
-
-
- * 風景画
-
-Thomas Moran, Claude Monet, Alfred Bierstadt, Frederic Edwin Church
+ * ポートレート：John Singer Sargent, Edgar Degas, Paul Cézanne, Jan van Eyck
+ * 油絵：Leonardo DaVinci, Vincent Van Gogh, Johannes Vermeer, Rembrandt
+ * 鉛筆・ペン画：Albrecht Dürer, Leonardo da Vinci, Michelangelo, Jean-Auguste-Dominique Ingres
+ * 風景画：Thomas Moran, Claude Monet, Alfred Bierstadt, Frederic Edwin Church
 
 作家を混ぜることは、面白い作品を作ることにつながるので、大いに推奨されます。
 
 ==== 4. 仕上げ
 この部分は、人によっては極端になり、この記事よりも長いプロンプトを作ることもあります。
 仕上げ（Finishing touches）とは、プロンプトを自分の好きなように仕上げるために、最終的に追加するもののことです。
-例えば、よりアーティスティックなイメージにしたい場合は、"アートステーション（www.artstation.com）で流行っている"「trending on artstation」を追加します。
+例えば、よりアーティスティックなイメージにしたい場合は、アートステーションで流行っている「trending on artstation」（www.artstation.com）を追加します。
 よりリアルなライティングを追加したい場合は、「Unreal Engine」を追加します。何を加えてもいいのですが、以下に例を挙げます。
 
 高精細「Highly detailed」、シュールレアリズム「surrealism」、アートステーションのトレンド「trending on art station」、トライアド配色（色相環を使った3角配色のこと）「triadic color scheme」、スムーズ「smooth」、シャープフォーカス「sharp focus」、マット「matte」、エレガント「elegant」、今まで見た中で最も美しい画像「the most beautiful image ever seen」、イラスト「illustration」、デジタルペイント「digital paint」、暗い「dark」、陰鬱「gloomy」、「octane render」（ Cinema4D や Blender に使われている Otoy社製の高品質レンダリングエンジン）、8K、4K、ウォッシュドカラー「washed colors」、シャープ「sharp」、ドラマチックライティング「dramatic lighting」、美しい「beautiful」、ポストプロセス「post processing」、今日の写真「picture of the day」、環境照明「ambient lighting」、叙事詩的構図「epic composition」……。
@@ -396,7 +383,6 @@ Thomas Moran, Claude Monet, Alfred Bierstadt, Frederic Edwin Church
 ==== 5. まとめ
 プロンプトエンジニアリングは、画像がどのように見えるかをよりよく制御することができます。
 （正しい方法で行えば）あらゆる面で画質が向上します。
-
 （こちらは原作の翻訳ですが）もしこのガイドの改善があれば、ぜひdiscord（Graverman#0804）で教えてください。
 
 
@@ -429,11 +415,44 @@ Stepsが少なすぎるとボケ過ぎ。右上のハートはなぜ生まれた
 せっかく無料で使える Stable Diffusion です。Dream Studio のような有料のUIではなく、Google Colaboratory を使って無料の Python 環境で利用してみたいと思います。
 
 必要になるのはこれらのURLです。
-詳細は、利用規約やマニュアルを読んでいただければよいと思いますが、試せるサンプルコードを紹介しておきます。
 
  * https://colab.research.google.com/
  * https://huggingface.co/spaces/stabilityai/stable-diffusion
  * https://huggingface.co/CompVis/stable-diffusion-v1-4
+
+HuggingFaceにおいて、CompVisの Stable Diffusion v1-4 データセット(Model Card)を無償で使うことができます。
+
+==== Stable Diffusion v1-4 ライセンス 
+
+CreativeML OpenRAIL Mライセンスは、BigScienceとRAIL Initiativeが責任あるAIライセンスの領域で共同で行っている作業から適応された、OpenRAIL Mライセンスです。
+私たちのライセンスのベースとなった BLOOM Open RAILライセンスについての記事もご覧ください。
+
+==== モデルの説明
+テキストプロンプトに基づく画像の生成・修正に利用できるモデルです。
+Imagenの論文で提案されているように、事前に学習した固定テキストエンコーダー（CLIP ViT-L/14）を使用する潜在拡散モデルです。
+
+
+==== 制限事項とバイアス
+【制限事項】
+
+ * 完全なフォトリアリズムを実現するものではない。
+ * 読みやすいテキストをレンダリングすることができない。
+ * 「青い球の上に赤い立方体が乗っている」ような、合成を伴う難しいタスクではうまく動作しない。
+ * 顔や人物全般が適切に生成されない場合がある。
+ * このモデルは主に英語のキャプションで学習させたので、他の言語ではうまく動作しない。
+ * モデルのオートエンコーダ部分はロッシーです（lossy＝データ失われる）。
+ * このモデルはアダルトコンテンツを含む大規模データセットLAION-5Bで学習させたもので、追加の安全機構や考慮なしに製品使用するには適しません。
+ * データセットを重複排除するための追加の手段は使用されていません。つまり学習データ内で重複している画像について、ある程度の暗記が確認されました。学習データは、https://rom1504.github.io/clip-retrieval/、記憶された画像の検出を支援する可能性があるため、検索することができます。
+
+【バイアス】
+
+画像生成モデルの性能は素晴らしいものですが、社会的バイアスを強化したり悪化させたりする可能性もあります。Stable Diffusion v1は、主に英語表記に限定された画像からなるLAION-2B(en)のサブセットで学習されました。他の言語を使用するコミュニティや文化からのテキストや画像は、十分に説明されていない可能性があります。これは西洋文化がデフォルトとして設定されることが多いため、モデル全体の出力に影響を及ぼします。さらに、英語以外のプロンプトを使用した場合のモデルのコンテンツ生成能力は、英語のプロンプトを使用した場合よりも著しく劣ります。
+
+
+==== Stable Diffusion を Google Colab で動かすサンプル
+
+詳細は、上記のマニュアルを読んでいただければよいと思いますが、試せるサンプルコードを紹介しておきます。
+
 
 //list[Stable Diffusion][Stable Diffusion を Google Colab で動かすサンプル][Python]{
 # インストール
