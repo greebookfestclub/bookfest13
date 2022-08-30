@@ -296,16 +296,40 @@ MidJourneyのファウンダーはLEAPのファウンダーでもあるので、
 
 画面の解説をします。
 
-//image[StableDiffusion_DreamStudioUI][DreamStudioのUI。プロンプトを入力して「Dream」ボタンを押すだけ]{
+//image[StableDiffusion_DreamStudioUI][Dream Studio のUI。プロンプトを入力して「Dream」ボタンを押すだけ]{
 //}
 
 
  * Width, Height：画像の解像度です。デフォルトは 512x512pixels。クレジットを消費するので必要がないときは小さいほうが良いです。また小さくしておくほうが高速動作します。
- * Cfg Scale：与えられたプロンプトに対する忠実さ。変更してもコストへの影響はありませんが、そこそこに揺らぎがないと結果がいつも同じになってしまうので賢いかもしれません。
+ * Cfg Scale：画像がどの程度プロンプトと同じになるかを調整します。値を大きくすると画像はプロンプトに近くなります。
  * Steps：画像の生成過程での「Diffusion」に何回のステップを行うか？デフォルトでは 50 Steps です。10 Steps で 0.2 credits, 最大の 150 Stepsで3.0 credits を消費します。
  * Number of Images：これはめんどくさがりには良いですね。サイコロを同時にたくさん振ることができます。最大9件の画像を生成することができます。クレジット消費量の表示は変わりませんが、減るスピードがあっという間になりますのでご注意ください。
  * Sampler：k_lms(デフォルト), ddim, plms, k_euler, k_euler_oncestral, k_heun, k_dpm_2, k_dpm_2_oncestral で、Diffusion のサンプリング方式を指定します。
+ * Seed：画像生成のための乱数シード、おそらく最初のガウスノイズの生成のために使われると推測します。つまり、このシード値を保存しておけば、そこそこに近い結果を検討することができるはずです。
  
+
+=== 各パラメータの違いを試してみる
+
+Dream Studio 各パラメータはどのような意味を持つのでしょうか。
+Cfg Scaleを最大値20（=揺らぎなし） にして、Stepsを最小の 10 から、デフォルトの 50, 最大の 150に変化して、2種類のプロンプトで観察したいと思います。
+
+ * 「A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ」(起動時のデフォルト))
+ * 「Dancing Hatsune Miku in Minecraft Trending on pixiv HQ」
+ 
+//image[StableDiffusion_Params][Dream Studio : Steps のみ変更して画像の違いを確認する]{
+//}
+
+他は全て同じパラメータ, Seed = 1457915964。
+【ギャラクシー】Stepsが増えると細部の描写が細かくなる。画の派手さ（星の輝き）は減る、脚の本数や山の描写は謎。
+
+【ミク】Stepsが少なすぎるとボケ過ぎ。右上のハートはなぜ生まれたのか?
+
+
+//image[StableDiffusion_Samplers][Dream Studio : サンプラーの変更は目立った違いはなさそう]{
+//}
+
+同様にサンプラーも変更してみましたが、この条件｛Cfg Scale = 20, Steps = 50, Number of Images = 1, Seed = 1457915964 ｝では違いは判りませんでした。
+
 
 === 少女画を描いて表現を探ってみる
 
