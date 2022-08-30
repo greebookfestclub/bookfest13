@@ -238,9 +238,7 @@ Stable Diffusion は 64x64 のガウスノイズの潜在変数シード(Latent 
 
 // ジェネレーティブAI開発者のKatherine Crowson氏による条件付き拡散モデル（conditional diffusion models）、
 // Open AIによるDall-E 2、Google BrainによるImagen、その他多くの洞察と組み合わせて構築されたもので、任意のテキスト入力から写真のようにリアルまたはアーティスティックな画像を生成することができます。
-
- * High-Resolution Image Synthesis with Latent Diffusion Models (https://arxiv.org/abs/2112.10752)
-
+// * High-Resolution Image Synthesis with Latent Diffusion Models (https://arxiv.org/abs/2112.10752)
 // 画像の一部を塗りつぶしてテキスト入力すると、その箇所だけテキスト通りに描き加えることができます。
 // しかも、描き加えたその箇所は、周囲の文脈のスタイルや照明に応じた影や反射を含み、周囲と調和した画像が合成されて生成されます。
 
@@ -300,13 +298,14 @@ MidJourneyのファウンダーはLEAPのファウンダーでもあるので、
 //}
 
 
- * Width, Height：画像の解像度です。デフォルトは 512x512pixels。クレジットを消費するので必要がないときは小さいほうが良いです。また小さくしておくほうが高速動作します。
+ * Width, Height：画像の解像度です。デフォルトは 512x512 pixels。最大は 1024x1024 pixels。クレジットを消費するので必要がないときは小さいほうが良いです。また小さくしておくほうが高速動作します。
  * Cfg Scale：画像がどの程度プロンプトと同じになるかを調整します。値を大きくすると画像はプロンプトに近くなります。
  * Steps：画像の生成過程での「Diffusion」に何回のステップを行うか？デフォルトでは 50 Steps です。10 Steps で 0.2 credits, 最大の 150 Stepsで3.0 credits を消費します。
  * Number of Images：これはめんどくさがりには良いですね。サイコロを同時にたくさん振ることができます。最大9件の画像を生成することができます。クレジット消費量の表示は変わりませんが、減るスピードがあっという間になりますのでご注意ください。
  * Sampler：k_lms(デフォルト), ddim, plms, k_euler, k_euler_oncestral, k_heun, k_dpm_2, k_dpm_2_oncestral で、Diffusion のサンプリング方式を指定します。
  * Seed：画像生成のための乱数シード、おそらく最初のガウスノイズの生成のために使われると推測します。つまり、このシード値を保存しておけば、そこそこに近い結果を検討することができるはずです。
  
+お値段的には ｛画像サイズ｝x ｛Steps｝の掛け算になっているようで、最大サイズの 1024x1024 pixels で Steps = ｛10, 25, 50, 75, 100, 150｝としたときに、消費クレジットはそれぞれ｛1.9, 4.7 , 14.1, 18.8, 28.2 ｝となっています。1000 クレジットが 10ポンドなので、1617.8 円。1クレジットあたり16.178円（2022/8/31のレート）。デフォルトだと17円/生成。最大でも457円/生成、ということになります。
 
 === 各パラメータの違いを試してみる
 
@@ -332,7 +331,54 @@ Cfg Scaleを最大値20（=揺らぎなし） にして、Stepsを最小の 10 �
 同様にサンプラーも変更してみましたが、この条件｛Cfg Scale = 20, Steps = 50, Number of Images = 1, Seed = 1457915964 ｝では違いは判りませんでした。
 
 
-=== 少女画を描いて表現を探ってみる
+
+=== おまけ：Stable Diffusion を 手元で動かしたい
+
+ * https://research.google.com/colaboratory/local-runtimes.html
+ * https://huggingface.co/spaces/stabilityai/stable-diffusion
+ * https://huggingface.co/CompVis/stable-diffusion-v1-4
+
+//list[Stable Diffusion][Stable Diffusion を Google Colab で動かすサンプル][Python]{
+# インストール
+!pip install --upgrade diffusers transformers scipy
+# https://huggingface.co/CompVis/stable-diffusion-v1-4 利用規約に同意が必要
+# HuggingFaceでアカウントを作ってトークンを取得して、張り付ける
+!huggingface-cli login
+# トークンの保存
+!git config --global credential.helper store
+import torch
+from diffusers import StableDiffusionPipeline
+pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", 
+                                               revision="fp16", 
+                                               torch_dtype=torch.float16,
+                                               use_auth_token=True)  
+pipe = pipe.to("cuda")
+# ここから先は自分の使いやすいように書き換えてください
+import os
+import datetime
+# 乱数のシード値。自分は Dream Studio からもってきます。
+seed = 1317567826
+generator = torch.Generator("cuda").manual_seed(seed)
+# プロンプト。
+prompt = "playing hatsune miku in minecraft trending on Pixiv HQ"
+# 保存場所。Google Driveが使えます
+path = f"/content/drive/MyDrive/StableDiffusion/"
+with torch.autocast("cuda"):
+  image = pipe(prompt, generator=generator)["sample"][0]
+
+# 画像を保存する（もっと上手に書いていいです）
+is_file = os.path.isfile(path+prompt+".png")
+if is_file:
+    d = datetime.datetime.now().strftime('%Y-%m-%d-%H%M%S')
+    image.save(path+d+" - "+str(seed)+" "+prompt+".png")
+else:
+    image.save(path+str(seed)+" " +prompt+".png")
+//}
+
+
+== 結論：人気絵師になって分かったこと
+
+// === 少女画を描いて表現を探ってみる
 
 作品「ちょっとこわいけど怖くない」ちょっとこわいけど怖くない妙な表情が出せたのでうれしい。一方では腕がとんでもないことになっているので怖い。
 
@@ -416,14 +462,6 @@ Alfons Mikuぼかしていますが、そこにはヤバい指がいます
 
 以上になります。サービス側でどんどん改善されていくと思いますので、これからも期待です。何かおもしろいスタイルがあったらTwitterで教えてください！
 
-==== おまけ：Stable Diffusion を 手元で動かしたい
-
- * https://research.google.com/colaboratory/local-runtimes.html
- * https://huggingface.co/spaces/stabilityai/stable-diffusion
- * https://huggingface.co/CompVis/stable-diffusion-v1-4
-
-
-== 結論：人気絵師になって分かったこと
 
 === タイトルはとても大事
 
