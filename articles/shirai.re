@@ -334,7 +334,12 @@ Cfg Scaleを最大値20（=揺らぎなし） にして、Stepsを最小の 10 �
 
 === おまけ：Stable Diffusion を 手元で動かしたい
 
- * https://research.google.com/colaboratory/local-runtimes.html
+せっかく無料で使える Stable Diffusion です。Dream Studio のような有料のUIではなく、Google Colaboratory を使って無料の Python 環境で利用してみたいと思います。
+
+必要になるのはこれらのURLです。
+詳細は、利用規約やマニュアルを読んでいただければよいと思いますが、試せるサンプルコードを紹介しておきます。
+
+ * https://colab.research.google.com/
  * https://huggingface.co/spaces/stabilityai/stable-diffusion
  * https://huggingface.co/CompVis/stable-diffusion-v1-4
 
@@ -374,6 +379,19 @@ if is_file:
 else:
     image.save(path+str(seed)+" " +prompt+".png")
 //}
+
+試しにランダムシードを同じ値にして結果の違いを比較してみました。
+Dream Studioのシード値からイイ感じに出力できたプロンプト文字列を使って、上記のコードで、同じシード値を使って生成してみます。
+理論上同じような画像が生成されれば大成功…！
+
+//image[StableDiffusion_Colab][Dream Studio と Colab で同じシードから探求できるようになった]{
+//}
+
+
+Google Colalbo上で特徴だけを残して探究するパイプラインができた…！
+これでDream Studioより使いやすく、探求コストを下げつつ画質向上できる…。
+そしてシード値がかわいい…！（へへへんたいだ……！？）
+
 
 
 == 結論：人気絵師になって分かったこと
