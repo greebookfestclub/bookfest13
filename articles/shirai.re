@@ -364,7 +364,7 @@ Cfg Scaleを最大値20（=揺らぎなし） にして、Stepsを最小の 10 �
 "Illustrated brown black Hatsune Miku is dancing with deer and ox in galaxy, by "Grotte de Lascaux", aged prehistoric wall painting strong paint brush yellow, brown, black. trending on national geographic, wide camera"初音ミクが鹿や牛と一緒に銀河系で踊っているイラストの茶色と黒、「ラスコー洞窟」による先史時代の壁画で、黄色、茶色、黒の強い絵筆を使用。
 
 
-//image[StableDiffusion_DreamStudioUI][ラスコー洞窟に描かれた初音ミク]{
+//image[StableDiffusion_Lascaux][ラスコー洞窟に描かれた初音ミク]{
 //}
 
 「ラスコー洞窟に描かれた鏡音リン・レン」
