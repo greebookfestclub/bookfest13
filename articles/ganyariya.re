@@ -1,5 +1,5 @@
 = 必要最低限な DI コンテナを作ってみる
-
+== はじめに
 こんにちは！ 私は 2022 年から WFS 社の新卒サーバーサイドエンジニアとして働かせていただいている @ganyariya @<fn>{ganyariya-twitter} です。
 チームに配属されて以降は、バックエンドの API 開発・運用などを行いながら、先輩方に追いつこうと日々勉強中です。
 
@@ -235,7 +235,7 @@ $c = new C(new E(), new F(new H(new K()), new I(new K()), new J(new K())));
 この問題を解決するために、依存関係の構造に着目します。
 依存関係は有向グラフかつ閉路がない、つまり非巡回有向グラフ (DAG) であるといえます。
 DAG の場合、根のノードから DFS の要領で再帰的に要素へアクセスすることで、依存性を自動的に解決できそうです。
-また、解決したオブジェクト (@<code>{$c, $k} など)をキャッシュしておけば、ノードの数を N, 辺の数を M とした場合、計算量が O(N + M) に抑えられます。 
+また、解決したオブジェクト (@<code>{$c, $k} など)をキャッシュしておけば、ノードの数を N, 辺の数を M とした場合、計算量が O(N + M) に抑えられます。
 
 この DFS を利用し、かつ解決したオブジェクトを保存し適宜取り出すものが DI コンテナです（ここまで来るまで長かった）。
 それでは、実際に DI コンテナの例を見ていき、自作していきます。
@@ -248,7 +248,7 @@ DI コンテナがあると、より手軽に依存性注入を実現できる�
 
 具体的には、DI コンテナは @<code>{{"key":"value"}}の形式で、オブジェクトを取り出すためのキーと、そのオブジェクト自体を紐付けて保存しています。
 
-@<list>{ganyariya-di-container}は DI コンテナのイメージ例です。 "hello" というキーに対して、 "world!" というオブジェクト（値）を格納しています。 
+@<list>{ganyariya-di-container}は DI コンテナのイメージ例です。 "hello" というキーに対して、 "world!" というオブジェクト（値）を格納しています。
 また、 UserCatRepositoryInterface::class というキーに対して、 Interface を実装した UserCatRepository のオブジェクトを格納しています。
 
 //list[ganyariya-di-container][DIコンテナのイメージ][php]{
@@ -344,7 +344,7 @@ class Container implements ContainerInterface
 }
 //}
 
-==== set と fetch 
+==== set と fetch
 
 さきほどの Container では、get で値を取り出せますが値を設定できません。
 そのため、@<list>{ganyariya-hako-set}のように、set(id, value) で値を設定できるようにします@<fn>{ganyariya-hako-set}。
@@ -469,18 +469,18 @@ PHP における DI コンテナがどのように依存性を解決している
 //footnote[ganyariya-hako-container-builder][https://github.com/ganyariya/Hako/blob/v0.1.1/src/Container/ContainerBuilder.php]
 
 #@# https://qiita.com/uhooi/items/03ec6b7f0adc68610426
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
-#@# 
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#
+#@#

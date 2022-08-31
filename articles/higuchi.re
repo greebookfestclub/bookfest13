@@ -1,5 +1,5 @@
 
-= Rspec+GitHubActions+DataStudioを使ったカバレッジ推移の可視化
+= RSpec+GitHubActions+DataStudioを使ったカバレッジ推移の可視化
 == 背景と目的
 品質向上のためには、テストを書くことが重要です。
 しかし、スケジュールに追われる中で、つい手を抜いてしまいがちな部分ではあります。
@@ -7,7 +7,7 @@
 本文章では、その手法について解説します。
 
 == SimpleCovからカバレッジ情報取得
-Ruby on Railsを使ったシステム開発を行っており、Rspecでテスト実装しています。
+Ruby on Railsを使ったシステム開発を行っており、RSpecでテスト実装しています。
 また、カバレッジはSimpleCovを使って取得しています。
 SimpleCovにはFormatterという機能があり、カバレッジ出力を好みの形に整形できます。
 Formatterを使って、カバレッジを1行のjsonに出力します。
@@ -133,7 +133,7 @@ $ bq mk -t --time_partitioning_type DAY aumo_media.simplecov simplecov.json
 
 作ったテーブルにデータを格納します。
 GitHubでPull Requestを作ると、GitHub Actionsでテストが回るように設定しています。
-そこで、rspec実行後にBigQueryへ転送する処理を追記します。
+そこで、RSpec実行後にBigQueryへ転送する処理を追記します。
 
 まず、BigQueryへの編集権限のあるサービスアカウントを作成します。
 それをGitHubに設定して、Actionsからsecrets.GCP_SERVICE_ACCOUNTで取得できるようにします。
@@ -149,7 +149,7 @@ GitHubの対象リポジトリを表示し、Settingタブをクリックしま�
 
 次にActionsの設定ファイルを変更します。
 設定ファイルは、.github/workflows/以下に存在します。
-そのrspec実行より下に@<list>{workflows}の記載を追記します。
+そのRSpec実行より下に@<list>{workflows}の記載を追記します。
 
 "Authenticate GCP"で、secretsに設定したサービスアカウントを使って認証を行います。
 "setup GCP"でbqコマンドを使えるようにして、"send coverage to BigQuery"でBigQueryへデータを送信します。
@@ -216,7 +216,7 @@ Google Accountへのログインが求められるので、BigQueryのユーザ�
 
 == まとめ
 カバレッジの時系列グラフを作成することができました。
-GitHub ActionsでRspecを回している方なら、2時間程度でグラフを作成できると思います。
+GitHub ActionsでRSpecを回している方なら、2時間程度でグラフを作成できると思います。
 Formatterに渡されるデータには、ファイル毎のカバレッジ情報も含まれています。
 それを使うことで、より詳細な分析も可能です。
 この記事がお役に立てれば幸いです。

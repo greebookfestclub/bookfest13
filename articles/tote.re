@@ -38,7 +38,7 @@ OOP(オブジェクト指向プログラミング)で語られがちな言葉が
 
 Aについて、たしかに自宅にそんな大量のサーバーマシンを置ける訳はないので(ですよね...?)、1サービス1サーバーみたいな贅沢はできません。
 そこで、筆者はベアメタル・ハイパーバイザーを用いることにしました。
-具体的にはVMWareのESXiを使います。なんと無料です！
+具体的にはVMwareのESXiを使います。なんと無料です！
 これはOSレベルの仮想化エンジンで、複数のゲストOSを起動することができます。
 これで、1つのマシンで複数のサーバーを起動出来るため、1サービス1サーバーへの道が開けます。
 
@@ -69,9 +69,9 @@ Bについて、これは一見バカみたいな問題に見えますが、趣�
 
 === サーバーインスタンスを自動で建てる Terraform
 なにはともあれ、まずはサーバーインスタンスがなければ始まりません。
-TerraformはいわゆるIaC(Infrastucture as Code)を実現するツールの1つです。HashiCorp社(他の製品ではVagrantなどが有名ですね)が開発しているOSSで、無料で使えます。 
+TerraformはいわゆるIaC(Infrastucture as Code)を実現するツールの1つです。HashiCorp社(他の製品ではVagrantなどが有名ですね)が開発しているOSSで、無料で使えます。
 Terraformは例えばAWSやGCPを始めとしたクラウドサービスを初めとした様々なサービスに対するインターフェイスを「Provider」という形で抽象化し、
-プラグインのように追加できるようにしていることで、同じような記法で様々なサービスに対して開発を行う事ができます。 
+プラグインのように追加できるようにしていることで、同じような記法で様々なサービスに対して開発を行う事ができます。
 
 また、Terraformはファイル本体に利用するProviderを指定するだけで、@<code>{terraform init}コマンドを実行した際に必要なProviderをダウンロードしてきてくれるので、依存関係などを自分で解消する必要がないのが便利です。
 
@@ -80,20 +80,20 @@ Terraformは例えばAWSやGCPを始めとしたクラウドサービスを初�
 
 //notice[terraform-provider-esxiの依存]{
 基本的にはprovider自身の依存関係を気にする必要はないのですが、今回使うterraform-provider-esxiはovftoolsという
-vmware社のツールに依存しているため、それは予めホストマシンにインストールしておく必要があります。
+VMware社のツールに依存しているため、それは予めホストマシンにインストールしておく必要があります。
 //}
 
 ====[column] コラム
 
-ちなみに、Hashicorp社が公式に出しているvsphere-providerというproviderも存在はしています。
-ESXiを管理するVSphereというシステムをVMWare社は提供していて、それを通してESXiを構築することができます。
-公式なので心惹かれるのですが、ESXiが無料で公開されている一方、VSphereは完全にエンタープライズ向けの製品で、結構良いお値段がするので個人で所有するのはちょっと......という感じですね。 
+ちなみに、HashiCorp社が公式に出しているvsphere-providerというproviderも存在はしています。
+ESXiを管理するVSphereというシステムをVMware社は提供していて、それを通してESXiを構築することができます。
+公式なので心惹かれるのですが、ESXiが無料で公開されている一方、VSphereは完全にエンタープライズ向けの製品で、結構良いお値段がするので個人で所有するのはちょっと......という感じですね。
 このproviderで、vsphere抜きにしてESXIだけ触れたら超最高なのですが、そう上手くはいかないですね。
 
 ====[/column]
 
 では、terraform-provider-esxiで構築用サーバーのインスタンスを作ってみましょう。
-次のようなHashicorp-HCLを記述します。
+次のようなHashiCorp-HCLを記述します。
 
 //list[tote-main-tf-1][main.tf][hcl]{
 variable "esxi_hostname"     {}
@@ -268,9 +268,9 @@ sshを用いて構成対象に接続し、自動的にコマンドを送るこ�
 
 また、この依存関係は使用するモジュールごとに異なっていて、例えばaptでレポジトリの鍵を新しく登録する@<code>{apt_key}モジュールは@<code>{gpg}に依存しています。
 
-モジュールごとに1つ1つ細かく依存関係があり、それらを先にインストールしておかなければ実行途中に失敗してしまうという点がansibleの欠点の1つではありますね。
+モジュールごとに1つ1つ細かく依存関係があり、それらを先にインストールしておかなければ実行途中に失敗してしまうという点がAnsibleの欠点の1つではありますね。
 
-スムーズにansibleでセットアップできるように、gpgとpython3だけ予めcloud-initでインストールしておくことにします。
+スムーズにAnsibleでセットアップできるように、gpgとpython3だけ予めcloud-initでインストールしておくことにします。
 
 //list[tote-cloud-init-2][cloud-init.yaml(追記)][yaml]{
 package_update: true
@@ -408,7 +408,7 @@ resources:
     icon: database
     source:
       region_name: ap-northeast-1
-      bucket: *** 
+      bucket: ***
       access_key_id: ((s3.access_key))
       secret_access_key: ((s3.secret_key))
       versioned_file: ***/***-cloudimg-amd64.ova
@@ -463,7 +463,7 @@ s3は公式リソースであり、特別な設定なしで利用することが
 
 一番見るべきはコードの最後の方で、terraformを実際にconcourseで実行していることが読み取れると思います。
 
-次に、この処理が完了した後にansibleを実行するようにしましょう。
+次に、この処理が完了した後にAnsibleを実行するようにしましょう。
 
 //footnote[tote-githubapp-content][concourseには標準でgitリソースが存在しているのですが、これは個人のssh鍵を利用するする必要があります。筆者は特定のOrganizationに限ってcloneできる鍵を作りたかったため、GithubAppsの認証情報を用いてcloneできるようにしたリソース、githubapp-contentを作成したという背景があります。 https://github.com/totegamma/githubapps-content-resource]
 
@@ -510,14 +510,14 @@ s3は公式リソースであり、特別な設定なしで利用することが
             done
 //}
 
-特にterraformの実行がansibleの実行になっただけで特に変わりないですが、少しシェルスクリプトで複雑なことをしています。
+特にterraformの実行がAnsibleの実行になっただけで特に変わりないですが、少しシェルスクリプトで複雑なことをしています。
 これは、①管理対象の全てにAnsibleをそれぞれ実行する という意味合いと、②管理対象のホスト名のAnsible-playbookがレポジトリに存在すればそれをそのまま実行し、そうでなければデフォルトのplaybookを実行する　という意味合いでできています。
 
 この辺はつくる人それぞれのカスタマイズが生きる箇所だと思いますが、筆者は「自動構築で管理するサーバーはそれはそれとして、ちょっと特定のミドルウェアの検証だけで作るサーバーはも基本的な設定を施した上で自動構築したい。」という気持ちがあったのでこのようなスクリプトを書きました。
 
 ====[column] コラム
 
-筆者は上記のterraformを実行するjob、ansibleを実行するjobに加え、Discordコマンドをイベントとして受け取り、特定のリソースをtaint状態にするjobを追加しています。
+筆者は上記のterraformを実行するjob、Ansibleを実行するjobに加え、Discordコマンドをイベントとして受け取り、特定のリソースをtaint状態にするjobを追加しています。
 taint状態はterraformのリソースが取りうる状態の一つで、この状態に指定されたリソースは、次のapply時に強制的にreplaceがかかります。
 
 taint状態などはgit上のファイルに直接記述するようなものではなく、イベント的に発生する事項なのでこのような実装にしています。
@@ -530,7 +530,7 @@ Concourseは様々なシークレットマネージャーをサポートして�
 
 === 機密情報の管理 Vault
 
-ValutはまたしてもHashicorp社のプロダクトの一つで、例によってオープンソース版は無料で利用することができます。
+ValutはまたしてもHashiCorp社のプロダクトの一つで、例によってオープンソース版は無料で利用することができます。
 VaultをインストールするAnsible Playbookは次の通りです。
 
 //list[tote-vault-ansible][ansible][yaml]{
@@ -623,7 +623,7 @@ CONCOURSE_VAULT_URL: http://<myip>:8200
 CONCOURSE_VAULT_CLIENT_TOKEN: hvs.****************
 //}
 
-これで、Concourseから安全にsshの鍵などを利用できるようになり、前述していたterraformやansibleの自動化タスクがデプロイできるようになりました。
+これで、Concourseから安全にsshの鍵などを利用できるようになり、前述していたterraformやAnsibleの自動化タスクがデプロイできるようになりました。
 
 === 自動構築用サーバー完成！
 これで、レポジトリに構成の定義をpushするだけで、好きにサーバーを構築できるようになりました。
@@ -715,4 +715,3 @@ RewriteRule ^/?(.*) "ws://myserviceip/$1"  [P]
 皆様も是非自宅サーバーをより快適にするべく、自動構築を初め、様々なツールを使ってみて、そして共有してくれたらと存じます。
 
 よい鯖缶ライフを！
-

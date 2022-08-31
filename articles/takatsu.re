@@ -270,7 +270,7 @@ check_external_difference
 
 ==== base_shellの導入
 
-こちらは、既に「使いづらさの分析」の項で薄っすら方針は提示しましたが、ズバリ、@<code>{.dotfiles} + shellだけで構成される"base_shell"コンテナを導入することで解決できます。
+こちらは、既に「使いづらさの分析」の項でうっすら方針は提示しましたが、ズバリ、@<code>{.dotfiles} + shellだけで構成される"base_shell"コンテナを導入することで解決できます。
 VSCode公式から提供されているplainなshell image@<fn>{takatsu-vscode-debian-base-dockerfile}@<fn>{takatsu-vscode-debian-dockerfile}をベースに、必要なpackageをapt等経由でinstall、その後@<code>{.dotfiles}を展開等すれば、作成可能です。
 好みのdistroを使えば良いとは思いますが、取り敢えずDebian辺りを使っておけば、恐らくpackageが無くて困るという問題は無いでしょう。
 HTTP認証であれば、container内部でhostのGitのcredentialをそのまま使えるのも大きなメリットです。（SSH認証であれば鍵ファイルをマウントすれば通信可能です。）
