@@ -101,7 +101,7 @@ LIMIT 6
 == フロントエンド周りのチューニング
 サーバーサイドの改善は一通り終わったので、次はフロントエンドの改善を行っていきます。フロントエンドのチューニングはGoogleが提供しているLighthouse@<fn>{light-house}が改善項目を色々と教えてくれるので、それを愚直に潰していく方針で進めました。
 
-=== 不要なjavascriptを削減する
+=== 不要なJavaScriptを削減する
 Lighthouseに「不要なJavaScriptがある」と警告が出ていたので、webpack-bundle-analyzer@<fn>{webpack-bundle-analyzer}を使用して不要なJavaScriptが無いか見てみました。
 
 //image[moment_before][webpack-bundle-analyzerの結果]{
