@@ -112,7 +112,7 @@ DDPMとSRはちょうど絵を描く工程に例えると、真っ白な紙に�
 ガウスノイズ以外のノイズでも動作することが報告されています。
 例えばColdモデル@<fn>{ColdDiffusion}、つまりランダム性がないDiffusionモデルも存在しますので、より制御された絵作りには別のモデルが選択できる可能性もありますね。
 
-//footnote[ColdDiffusion][[Cold Diffusion: Inverting Arbitrary Image Transforms Without Noise](https://arxiv.org/abs/2208.09392)]
+//footnote[ColdDiffusion][Cold Diffusion: Inverting Arbitrary Image Transforms Without Noise (https://arxiv.org/abs/2208.09392)]
 
 === GLIDE：テキストガイドによる拡散モデルを使った写実画像生成
 
