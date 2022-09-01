@@ -159,7 +159,7 @@ Discordをインターフェースとしており、25枚は無料で生成す�
 //image[StableDiffusion_MidJourney][(左)"high school girl in metaverse"／(右)超解像化された結果]{
 //}
 
-細かい造作を入れていきたいので、「REALITY manga style smiling avatar female with wings and cat ears（REALITY, マンガ風, 笑顔の, アバター女性, 羽と猫耳付き）」で探索してみます。
+細かい造作を入れていきたいので、「@<code>{REALITY manga style smiling avatar female with wings and cat ears}（REALITY, マンガ風, 笑顔の, アバター女性, 羽と猫耳付き）」で探索してみます。
 
 そもそも ``REALITY'' が何のことなのか、知っているのかどうか？でいうと、そもそもこれは判定が難しいワードですね。
 結果としては雰囲気はないこともない（実験したのは2022/8/4ごろです、今後変わる可能性もあります）。
