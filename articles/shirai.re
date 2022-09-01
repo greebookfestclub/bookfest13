@@ -110,9 +110,9 @@ DDPMとSRはちょうど絵を描く工程に例えると、真っ白な紙に�
 
 そして「なぜこのノイズの除去で画像が生成されるのか？」という点については、また別途研究されていてわかっていないことも多かったようです。
 ガウスノイズ以外のノイズでも動作することが報告されています。
-例えばColdモデル、つまりランダム性がないDiffusionモデルも存在しますので、より制御された絵作りには別のモデルが選択できる可能性もありますね。
+例えばColdモデル@<fn>{ColdDiffusion}、つまりランダム性がないDiffusionモデルも存在しますので、より制御された絵作りには別のモデルが選択できる可能性もありますね。
 
- * Cold Diffusion: Inverting Arbitrary Image Transforms Without Noise (https://arxiv.org/abs/2208.09392)
+//footnote[ColdDiffusion][[Cold Diffusion: Inverting Arbitrary Image Transforms Without Noise](https://arxiv.org/abs/2208.09392)]
 
 === GLIDE：テキストガイドによる拡散モデルを使った写実画像生成
 
@@ -142,7 +142,7 @@ CLIPの画像埋め込みとテキストから画像自体を生成する「デ�
 自然言語による記述文と、「デコーダ」は、CLIP 画像埋め込みから生成します。
 画像を説明する説明文が言語モデルを介して「embedded特徴」に変換されます。
 学習と生成は以前と同じように進行しますが、ノイズ除去の追加入力としてヒントを提供するテキスト入力が入ります。
-画像を受け取ってembedded特徴を生成するので、「CLIP を反転しているものだ」と考えればよいかもしれません（なので unCLIP ）。
+画像を受け取ってembedded特徴を生成するので、「CLIP を反転しているものだ」と考えればよいかもしれません（なので unCLIP と呼んでいるのかも）。
 
 
 == MidJourney を使ってみる
@@ -150,10 +150,10 @@ CLIPの画像埋め込みとテキストから画像自体を生成する「デ�
 さて技術は使ってみなければその本質はわかりません。
 まずは 「DALL·E 2」と「Stable Diffusion」の間に生まれた「MidJounery」を使って試してみました。
 
- * https://www.midjourney.com/home/
+ * 「MidJounery」 https://www.midjourney.com/home/
 
 Discordをインターフェースとしており、25枚は無料で生成することができます。会員登録していれば商用利用も可能とのこと。
-ちょうど仕事でコンセプト画を描かなくてはならないので、例として「high school girl in metaverse（メタバースにおける高校生の少女）」などをプロンプトにしています。
+ちょうど仕事でコンセプト画を描かなくてはならないので、例として「@<tt>{high school girl in metaverse}（メタバースにおける高校生の少女）」などをプロンプトにしています。
 
 
 //image[StableDiffusion_MidJourney][(左)"high school girl in metaverse"／(右)超解像化された結果]{
