@@ -235,8 +235,9 @@ Stable Diffusion は 64x64 のガウスノイズの潜在変数シード(Latent 
 なお与えた単語の意味をベクトルで保有していますのでWord2Vecのように単語間の類似や加算減算なども可能なようです（言語で指定することは難しいが）。
 
 
-論文「High-Resolution Image Synthesis with Latent Diffusion Models」（https://arxiv.org/abs/2112.10752）や、利用のためのライセンスなどは後ほど Google Colaboratory での利用において解説します。
+論文@<fn>{HR}や、利用のためのライセンスなどは後ほど Google Colaboratory での利用において解説します。
 
+//footnote[HR][High-Resolution Image Synthesis with Latent Diffusion Models, https://arxiv.org/abs/2112.10752]
 
 // ジェネレーティブAI開発者のKatherine Crowson氏による条件付き拡散モデル（conditional diffusion models）、
 // Open AIによるDall-E 2、Google BrainによるImagen、その他多くの洞察と組み合わせて構築されたもので、任意のテキスト入力から写真のようにリアルまたはアーティスティックな画像を生成することができます。
