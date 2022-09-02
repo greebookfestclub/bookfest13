@@ -398,7 +398,7 @@ Cfg Scaleを最大値20（=揺らぎなし） にして、Stepsを最小の 10 �
 他は全て同じパラメータ, Seed = 1457915964。
 
 
- * 【Galaxy】「A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ」(起動時のデフォルト))
+ * 【Galaxy】「A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ」(起動時のデフォルト)
 Stepsが増えると細部の描写が細かくなる。画の派手さ（星の輝き）は減る、脚の本数や山の描写は謎。
 
  * 【Miku】「Dancing Hatsune Miku in Minecraft Trending on pixiv HQ」
@@ -442,7 +442,9 @@ Imagenの論文で提案されているように、事前に学習した固定�
  * このモデルは主に英語のキャプションで学習させたので、他の言語ではうまく動作しない。
  * モデルのオートエンコーダ部分はロッシーです（lossy＝データ失われる）。
  * このモデルはアダルトコンテンツを含む大規模データセットLAION-5Bで学習させたもので、追加の安全機構や考慮なしに製品使用するには適しません。
- * データセットを重複排除するための追加の手段は使用されていません。つまり学習データ内で重複している画像について、ある程度の暗記が確認されました。学習データは、https://rom1504.github.io/clip-retrieval/、記憶された画像の検出を支援する可能性があるため、検索することができます。
+ * データセットの重複排除のための追加的な手段は用いていません。つまり学習データで重複している画像について、ある程度の重複記憶が観察されています。
+学習データは、https://rom1504.github.io/clip-retrieval/ 重複記憶された画像の検出を追跡検索することができます。
+
 
 【バイアス】
 
