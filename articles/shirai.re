@@ -330,7 +330,7 @@ MidJourneyのファウンダーはLEAPのファウンダーでもあるので、
 このようにして生成された画像は、ランダムで無秩序になる傾向があるからです。以下は、私が以前のプロンプトを実行して生成した例です。
 
 
-//image[https://res.cloudinary.com/zenn/image/fetch/s--hwDt7UcY--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_1200/https://beta.dreamstudio.ai/media/images/prompt-guide-example.png][Dream Studio example]{
+//image[StableDiffusion-prompt-guide-example][Dream Studio example]{
 //}
 
 見てわかるように、これらの画像は風景が不規則で、とても美的センスがあるとは思えません。ここで、次のポイントに移ります。
