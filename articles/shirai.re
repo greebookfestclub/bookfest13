@@ -331,19 +331,6 @@ MidJourneyのファウンダーはLEAPのファウンダーでもあるので、
 見てわかるように、これらの画像は風景が不規則で、とても美的センスがあるとは思えません。ここで、次のポイントに移ります。
 
 
-==== 3. アーティスト
-
-自分のスタイルをより具体的にしたり、イメージをより一貫したものにするために、プロンプトにアーティストの名前を使用することができます。
-例えば、非常に抽象的なイメージにしたい場合は、「パブロ・ピカソ作」“made by Pablo Picasso” または単に ピカソ「Picasso」と付け加えるとよいでしょう。
-
-以下に、さまざまなスタイルのアーティストのリストを掲載しますが、新しいアートを発見するクールな方法として、常にさまざまなアーティストを検索することをお勧めします。
-
- * ポートレート：@<tt>{John Singer Sargent, Edgar Degas, Paul Cézanne, Jan van Eyck}
- * 油絵：@<tt>{Leonardo DaVinci, Vincent Van Gogh, Johannes Vermeer, Rembrandt}
- * 鉛筆・ペン画：@<tt>{Albrecht Dürer, Leonardo da Vinci, Michelangelo, Jean-Auguste-Dominique Ingres}
- * 風景画：@<tt>{Thomas Moran, Claude Monet, Alfred Bierstadt, Frederic Edwin Church}
-
-作家を混ぜることは、面白い作品を作ることにつながるので、大いに推奨されます。
 
 ==== 4. 仕上げ
 この部分は、人によっては極端になり、この記事よりも長いプロンプトを作ることもあります。
