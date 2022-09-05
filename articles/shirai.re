@@ -508,20 +508,6 @@ Google Colalbo上で特徴だけを残して探究するパイプラインがで
 
 
 
-=== Diffusion モデルの謎と可能性
-ところで Stable Diffusion の Diffusionモデル、「なぜこのガウスノイズの除去で画像が生成されるのか？」という点については、別途研究されていて、わかっていないことも多かったようです。
-
-Diffusionモデルはガウスノイズを追加して画像を劣化させる処理と、そのノイズを除去する処理の繰り返しによって成立しています。
-この工程はランジュバン方程式 (Langevin equation) というブラウン運動の説明にも使われる確率微分方程式で説明されていますが、このノイズ追加工程は「正規分布に従うノイズ以外」でも動作することが報告されています。
-例えば Cold Diffusion モデル@<fn>{ColdDiffusion}です。正規分布に従うガウスノイズでしか動作しないはずの Diffusion モデルが、ImageNet-C というブラーや降雪など各種のノイズを加えたデータセットでも動作することが確認されています。
-
-完全なガウスノイズからヒントだけで画像が生成できるのだから、もう驚くことはないかもしれませんが、
-そもそも、Diffusionモデルがランダムな拡散である必要すらない可能性もあるということで、
-より制御された絵作りに利用できるだけでなく、ボカシやモザイクの除去などにも影響がある話ですし、(これは筆者の空想ですが)それらの隠蔽処理のもっともらしい復元において、任意の画像を差し込むことすらできる可能性があります。
-
-//image[StableDiffusion_ColdDiffusion][Cold Diffusion を書いた Tom Goldstein 先生の論文紹介ツイートより。ノイズ付加、ブラー以外に、雪やアニマル化が加えられているにもかかわらず逆工程で復元できている。 https://twitter.com/tomgoldsteincs/status/1562503869984559104]
-
-//footnote[ColdDiffusion][Cold Diffusion: Inverting Arbitrary Image Transforms Without Noise, https://arxiv.org/abs/2208.09392]
 
 == 結論：人気絵師になって分かったこと
 
