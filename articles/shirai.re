@@ -457,42 +457,6 @@ Imagenの論文で提案されているように、事前に学習した固定�
 詳細は、上記のマニュアルを読んでいただければよいと思いますが、試せるサンプルコードを紹介しておきます。
 実際の Colab でのコードブロックは丸コピではなく、ステップごとに入力して確認していくことをお勧めします。
 
-//list[Stable Diffusion][Stable Diffusion を Google Colab で動かすサンプル][Python]{
-# インストール
-!pip install --upgrade diffusers transformers scipy
-# https://huggingface.co/CompVis/stable-diffusion-v1-4 利用規約に同意が必要
-# HuggingFaceでアカウントを作ってトークンを取得して、張り付ける
-!huggingface-cli login
-# トークンの保存
-!git config --global credential.helper store
-import torch
-from diffusers import StableDiffusionPipeline
-pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", 
-                                               revision="fp16", 
-                                               torch_dtype=torch.float16,
-                                               use_auth_token=True)  
-pipe = pipe.to("cuda")
-# ここから先は自分の使いやすいように書き換えてください
-import os
-import datetime
-# 乱数のシード値。自分は Dream Studio からもってきます。
-seed = 1317567826
-generator = torch.Generator("cuda").manual_seed(seed)
-# プロンプト。
-prompt = "playing hatsune miku in minecraft trending on Pixiv HQ"
-# 保存場所。Google Driveが使えます。使いやすいディレクトリを作って指定。
-path = f"/content/drive/MyDrive/StableDiffusion/"
-with torch.autocast("cuda"):
-  image = pipe(prompt, generator=generator)["sample"][0]
-
-# 画像を保存する（もっと上手に書いていいです）
-is_file = os.path.isfile(path+prompt+".png")
-if is_file:
-    d = datetime.datetime.now().strftime('%Y-%m-%d-%H%M%S')
-    image.save(path+d+" - "+str(seed)+" "+prompt+".png")
-else:
-    image.save(path+str(seed)+" " +prompt+".png")
-//}
 
 試しにランダムシードを同じ値にして結果の違いを比較してみました。
 Dream Studioのシード値からイイ感じに出力できたプロンプト文字列を使って、上記のコードで、同じシード値を使って生成してみます。
@@ -635,7 +599,14 @@ pixiv の通知は鳴りやみません。自分で手で描いた時は、何�
 でも「Gundamiku」シリーズをバンダイさんやクリプトンさんやその他の著作権者さんやそのファンの皆さんに攻撃されてまで作る必要はないですよね。
 ある程度良作のコンセプト画像ができれば、あとはプロの方が作ったほうが良いと思います。
 
+特に「自由に書いて/描いてよい」ではなく、「細かい指定があるお客さん」の依頼を受けるような例はとても大変だと思います。
+Photoshopでちょっと描き足せばいいような修正ならともかく、『背景にこういうロゴを入れてほしい』といったリクエストはまず無理だと思います。
+まあこれは「人間の絵師さんでも同じだ」と思うかもしれないのですが、『どうせ呪文で何でも描けるんでしょ？』という視点に立たれると、より大変だと思います。
+
+
 === 「AI神絵師」はコスト的に見合うのか？
+
+「AI神絵師」はコスト的に見合うのでしょうか。
 
 そもそも MidJourney や Dream Studio といったAI画像生成サービスに支払っている計算機コストを上回るような、ファンからのお布施が入ってこなければ「職業：神絵師」が成立しないと思います。
 手元で Python環境やGPU演算環境をつくれば少しは安くなるのかもしれないですが、それでもお客さんから10円でもお金をもらうっていうのは大変なことです。
