@@ -457,6 +457,42 @@ Imagenの論文で提案されているように、事前に学習した固定�
 詳細は、上記のマニュアルを読んでいただければよいと思いますが、試せるサンプルコードを紹介しておきます。
 実際の Colab でのコードブロックは丸コピではなく、ステップごとに入力して確認していくことをお勧めします。
 
+//list[Stable Diffusion][Stable Diffusion を Google Colab で動かすサンプル][Python]{
+# インストール
+!pip install --upgrade diffusers transformers scipy
+# https://huggingface.co/CompVis/stable-diffusion-v1-4 利用規約に同意が必要
+# HuggingFaceでアカウントを作ってトークンを取得して、張り付ける
+!huggingface-cli login
+# トークンの保存
+!git config --global credential.helper store
+import torch
+from diffusers import StableDiffusionPipeline
+pipe = StableDiffusionPipeline.from_pretrained("CompVis/stable-diffusion-v1-4", 
+                                               revision="fp16", 
+                                               torch_dtype=torch.float16,
+                                               use_auth_token=True)  
+pipe = pipe.to("cuda")
+# ここから先は自分の使いやすいように書き換えてください
+import os
+import datetime
+# 乱数のシード値。自分は Dream Studio からもってきます。
+seed = 1317567826
+generator = torch.Generator("cuda").manual_seed(seed)
+# プロンプト。
+prompt = "playing hatsune miku in minecraft trending on Pixiv HQ"
+# 保存場所。Google Driveが使えます。使いやすいディレクトリを作って指定。
+path = f"/content/drive/MyDrive/StableDiffusion/"
+with torch.autocast("cuda"):
+  image = pipe(prompt, generator=generator)["sample"][0]
+
+# 画像を保存する（もっと上手に書いていいです）
+is_file = os.path.isfile(path+prompt+".png")
+if is_file:
+    d = datetime.datetime.now().strftime('%Y-%m-%d-%H%M%S')
+    image.save(path+d+" - "+str(seed)+" "+prompt+".png")
+else:
+    image.save(path+str(seed)+" " +prompt+".png")
+//}
 
 試しにランダムシードを同じ値にして結果の違いを比較してみました。
 Dream Studioのシード値からイイ感じに出力できたプロンプト文字列を使って、上記のコードで、同じシード値を使って生成してみます。
@@ -768,7 +804,7 @@ Stable Diffusion にはDALL-E2にあったような「任意の場所を描き�
 
 　　　2022年8月31日 初音ミクの15回目の17歳の誕生日にて 白井暁彦
 
-// https://wiis.info/blog/photography-and-impressionism/
+#@# https://wiis.info/blog/photography-and-impressionism/
 
 //footnote[tweet0824][https://twitter.com/o_ob/status/1562248466490748928]
 //footnote[GLIDE][https://github.com/openai/glide-text2im]
