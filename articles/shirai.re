@@ -537,15 +537,15 @@ AI画像生成で人気絵師になるまでの流れを紹介します。
 === 「実在しないフィギュア」シリーズが人気になる
 
 筆者が見つけた ArtStation 以外のオススメの「@<tt>{trending on}」は、「@<tt>{pixiv}」と「@<tt>{figma}」です。
-「pixivも学習してるんだ、すごいな！」という感動もありました。それ以上に「@<tt>{figma}」に至っては以下の2つのサイトがあるのですが、きっちりフィギュアのほうが学習されています。
+「pixivも学習してるんだ、すごいな！」という感動もありました。それ以上に「@<tt>{figma}」に至っては、インターフェイスデザインツールとフィギュアの2つの有名なサイトがあるのですが、きっちりフィギュアのほうが学習されています。
 
- * コラボレーションインターフェイスデザインツール「Figma」 https://www.figma.com/
- * マックスファクトリー可動アクションフィギュアシリーズ「figma」　https://www.figma.jp/ 
+#@# * コラボレーションインターフェイスデザインツール「Figma」 https://www.figma.com/
+#@# * マックスファクトリー可動アクションフィギュアシリーズ「figma」　https://www.figma.jp/ 
 
 //image[StableDiffusion_Figma][実在しないフィギュア「Chibi Zombie Fighters」]{
 //}
 
-「実在しないフィギュア」のシリーズが（筆者の予想に反して）人気でした。
+「実在しないフィギュア」のシリーズが（筆者の予想に反して）人気で、ファンが付きました。
 特に、ガンダムやセーラームーン、初音ミクといった、異世界コラボフィギュアがかんたんに作れてしまうのがインパクトがあります。
 「Gundamiku」（ガンダム feat.初音ミク）というポップアートの権化みたいなプラモを作っていたら結構人気になりましたが、
 これは、同人誌とはいえ割愛したいと思います（ pixiv 上で探してみてください！）。
@@ -560,7 +560,7 @@ AI画像生成で人気絵師になるまでの流れを紹介します。
 
 「歴史上存在しない絵」としては、「北斎風新幹線」などは「@<tt>{Shinkansen by hokusai}」で描けます。
 しかし「人類がまだ描いたことがない絵」は描けるでしょうか、具体的には先史時代、人類最初期の壁画であるラスコー洞窟に初音ミクを描いてみる挑戦をしました。
-呪文としては以下のような感じになります。
+呪文としては以下のような文字列になります。
 
  * @<tt>{"Illustrated brown black Hatsune Miku is dancing with deer and ox in galaxy, by "Grotte de Lascaux", aged prehistoric wall painting strong paint brush yellow, brown, black. trending on national geographic, wide camera"}
 
