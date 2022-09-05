@@ -374,13 +374,13 @@ MidJourneyのファウンダーはLEAPのファウンダーでもあるので、
 例えば、よりアーティスティックなイメージにしたい場合は、アートステーションで流行っている「trending on artstation」（www.artstation.com）を追加します。
 よりリアルなライティングを追加したい場合は、「Unreal Engine」を追加します。何を加えてもいいのですが、以下に例を挙げます。
 
-#@# 高精細「@<tt>{Highly detailed}」、シュールレアリズム「@<tt>{surrealism}」、アートステーションのトレンド「@<tt>{trending on art station}」、トライアド配色（色相環を使った3角配色のこと）「@<tt>{triadic color scheme}」、スムーズ「@<tt>{smooth}」、シャープフォーカス「@<tt>{sharp focus}」、マット「@<tt>{matte}」、エレガント「@<tt>{elegant}」、今まで見た中で最も美しい画像「@<tt>{the most beautiful image ever seen}」、イラスト「@<tt>{illustration}」、デジタルペイント「@<tt>{digital paint}」、暗い「@<tt>{dark}」、陰鬱「@<tt>{gloomy}」、「@<tt>{octane render}」（ Cinema4D や Blender に使われている Otoy社製の高品質レンダリングエンジン）、@<tt>{8K}、@<tt>{4K}、ウォッシュドカラー「@<tt>{washed colors}」、シャープ「@<tt>{sharp}」、ドラマチックライティング「@<tt>{dramatic lighting}」、美しい「@<tt>{beautiful}」、ポストプロセス「@<tt>{post processing}」、今日の写真「@<tt>{picture of the day}」、環境照明「@<tt>{ambient lighting}」、叙事詩的構図「@<tt>{epic composition}」……。
+高精細「@<tt>{Highly detailed}」、シュールレアリズム「@<tt>{surrealism}」、アートステーションのトレンド「@<tt>{trending on art station}」、トライアド配色（色相環を使った3角配色のこと）「@<tt>{triadic color scheme}」、スムーズ「@<tt>{smooth}」、シャープフォーカス「@<tt>{sharp focus}」、マット「@<tt>{matte}」、エレガント「@<tt>{elegant}」、今まで見た中で最も美しい画像「@<tt>{the most beautiful image ever seen}」、イラスト「@<tt>{illustration}」、デジタルペイント「@<tt>{digital paint}」、暗い「@<tt>{dark}」、陰鬱「@<tt>{gloomy}」、「@<tt>{octane render}」（ Cinema4D や Blender に使われている Otoy社製の高品質レンダリングエンジン）、@<tt>{8K}、@<tt>{4K}、ウォッシュドカラー「@<tt>{washed colors}」、シャープ「@<tt>{sharp}」、ドラマチックライティング「@<tt>{dramatic lighting}」、美しい「@<tt>{beautiful}」、ポストプロセス「@<tt>{post processing}」、今日の写真「@<tt>{picture of the day}」、環境照明「@<tt>{ambient lighting}」、叙事詩的構図「@<tt>{epic composition}」……。
 
 
 ==== 5. まとめ
 プロンプトエンジニアリングは、画像がどのように見えるかをよりよく制御することができます。
 （正しい方法で行えば）あらゆる面で画質が向上します。
-（こちらは原作の翻訳ですが）もしこのガイドの改善があれば、ぜひdiscord（Graverman#0804）で教えてください。
+（こちらは原作の翻訳ですが）もしこのガイドの改善があれば、ぜひ discord（Graverman#0804）で教えてください。
 
 
 === 各パラメータの違いを試してみる
