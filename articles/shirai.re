@@ -251,22 +251,8 @@ MidJourneyもその後、内部で Stable Diffusion を取り込んだらしく�
 この背景にあるのは「拡散モデル」の発展であり、学術系研究者グループや、AIスタートアップが知見と結果を出し合いながら、あっという間に私企業によるサービスを塗り替えていきました。
 そしてこの技術は画像生成だけではなく、言語や音声など他のドメインでのデノイズや創作の質向上が期待できそうです。
 MidJourneyのファウンダーはLEAPのファウンダーでもあるので、きっと大きな変革をしてくれると思います。
+そもそも Stable Diffusion に人気の座を奪われた数日後には Stable Diffusion を取り込んでいました。
 
-
-=== Diffusion モデルの謎と可能性
-ところで「なぜこのガウスノイズの除去で画像が生成されるのか？」という点については、別途研究されていて、わかっていないことも多かったようです。
-
-Diffusionモデルはガウスノイズを追加して画像を劣化させる処理と、そのノイズを除去する処理の繰り返しによって成立しています。
-この工程はランジュバン方程式 (Langevin equation) というブラウン運動の説明にも使われる確率微分方程式で説明されていますが、このノイズ追加工程は「正規分布に従うノイズ以外」でも動作することが報告されています。
-例えば Cold Diffusion モデル@<fn>{ColdDiffusion}です。正規分布に従うガウスノイズでしか動作しないはずの Diffusion モデルが、ImageNet-C というブラーや降雪など各種のノイズを加えたデータセットでも動作することが確認されています。
-
-完全なガウスノイズからヒントだけで画像が生成できるのだから、もう驚くことはないかもしれませんが、
-そもそも、Diffusionモデルがランダムな拡散である必要すらない可能性もあるということで、
-より制御された絵作りに利用できるだけでなく、ボカシやモザイクの除去などにも影響がある話ですし、(これは筆者の空想ですが)それらの隠蔽処理のもっともらしい復元において、任意の画像を差し込むことすらできる可能性があります。
-
-//image[StableDiffusion_ColdDiffusion][Cold Diffusion を書いた Tom Goldstein 先生のツイートより, https://twitter.com/tomgoldsteincs/status/1562503869984559104]
-
-//footnote[ColdDiffusion][Cold Diffusion: Inverting Arbitrary Image Transforms Without Noise, https://arxiv.org/abs/2208.09392]
 
 == Stable Diffusionで絵を描くテクニック
 
@@ -333,7 +319,7 @@ Diffusionモデルはガウスノイズを追加して画像を劣化させる�
 ==== 1. 生のプロンプト
 生のプロンプト(Raw Prompt) とは、例えば、生成したいものを記述する最もシンプルな方法です。
 
-パンダ「Panda」， 剣を持った戦士「A warrior with a sword」，スケルトン「Skeleton」
+パンダ「@<tt>{Panda}」， 剣を持った戦士「@<tt>{A warrior with a sword}」，スケルトン「@<tt>{Skeleton}」
 
 これはプロンプトの基本的な構成要素です。ほとんどの初心者は、生のプロンプトだけを使うことから始めますが、これは通常間違いです。
 このようにして生成された画像は、ランダムで無秩序になる傾向があるからです。以下は、私が以前のプロンプトを実行して生成した例です。
@@ -350,25 +336,27 @@ Diffusionモデルはガウスノイズを追加して画像を劣化させる�
 スタイルは生のプロンプトの直後に画像に最も影響を与えるため、よく選ばれたスタイルと生のプロンプトを持つだけで十分な場合があります。
 
 最も一般的に使用されるスタイルは…… 
-リアリスティック「Realistic」，
-油絵「Oil painting」，
-鉛筆画「Pencil drawing」，
-コンセプトアート「Concept art」，
+リアリスティック「@<tt>{Realistic}」，
+油絵「@<tt>{Oil painting}」，
+鉛筆画「@<tt>{Pencil drawing}」，
+コンセプトアート「@<tt>{Concept art}」，
 これらのスタイルをどのように使うか、1つ1つ検証していきます。
 
 リアルな画像の場合、そのスタイルには様々な方法があり、ほとんどが似たような画像に仕上がります。
 ここでは、よく使われる写実的な画像にするためのテクニックを紹介します。
 
- 1. ある写真＋生のプロンプト「a photo of + raw prompt」
- 2. フォトグラフ＋生のプロンプト「a photograph of + raw prompt」
- 3. 生のプロンプト、ハイパーリアリスティック「raw prompt, hyperrealistic」
- 4. 生のプロンプト、リアリスティック「raw prompt, realistic」
+ 1. ある写真＋生のプロンプト「@<tt>{a photo of}+ raw prompt」
+ 2. フォトグラフ＋生のプロンプト「@<tt>{a photograph of} + raw prompt」
+ 3. 生のプロンプト＋ハイパーリアリスティック「raw prompt, @<tt>{hyperrealistic}」
+ 4. 生のプロンプト＋リアリスティック「raw prompt, @<tt>{realistic}」
 
 もちろん、これらを組み合わせることで、よりリアルな画像を得ることができます。
-油絵を取得するには、プロンプトに「an oil painting of」を追加するだけです。
-この場合、フレーム内の油絵が表示されることがありますが、これを修正するには、プロンプトを再実行するか、生プロンプト + 油絵「oil painting」を使用することができます。
-鉛筆画を作成するには、生のプロンプトに「a pencil drawing of」を追加するか、生のプロンプト＋「pencil drawing」とするだけです。
+油絵を取得するには、プロンプトに「@<tt>{an oil painting of}」を追加するだけです。
+この場合、フレーム内の油絵が表示されることがありますが、これを修正するには、プロンプトを再実行するか、生プロンプト + 油絵「@<tt>{oil painting}」を使用することができます。
+鉛筆画を作成するには、生のプロンプトに「@<tt>{a pencil drawing of}」を追加するか、生のプロンプト＋「@<tt>{pencil drawing}」とするだけです。
 風景画の場合も同様です。
+
+筆者追記：ここにカメラの製品名やレンズの焦点距離を入れるというテクニックも見つかっています（例：@<tt>{photo by Canon EOS 5D 80mm}）
 
 ==== 3. アーティスト
 
@@ -377,20 +365,20 @@ Diffusionモデルはガウスノイズを追加して画像を劣化させる�
 
 以下に、さまざまなスタイルのアーティストのリストを掲載しますが、新しいアートを発見するクールな方法として、常にさまざまなアーティストを検索することをお勧めします。
 
- * ポートレート：John Singer Sargent, Edgar Degas, Paul Cézanne, Jan van Eyck
- * 油絵：Leonardo DaVinci, Vincent Van Gogh, Johannes Vermeer, Rembrandt
- * 鉛筆・ペン画：Albrecht Dürer, Leonardo da Vinci, Michelangelo, Jean-Auguste-Dominique Ingres
- * 風景画：Thomas Moran, Claude Monet, Alfred Bierstadt, Frederic Edwin Church
+ * ポートレート：@<tt>{John Singer Sargent, Edgar Degas, Paul Cézanne, Jan van Eyck}
+ * 油絵：@<tt>{Leonardo DaVinci, Vincent Van Gogh, Johannes Vermeer, Rembrandt}
+ * 鉛筆・ペン画：@<tt>{Albrecht Dürer, Leonardo da Vinci, Michelangelo, Jean-Auguste-Dominique Ingres}
+ * 風景画：@<tt>{Thomas Moran, Claude Monet, Alfred Bierstadt, Frederic Edwin Church}
 
 作家を混ぜることは、面白い作品を作ることにつながるので、大いに推奨されます。
 
 ==== 4. 仕上げ
 この部分は、人によっては極端になり、この記事よりも長いプロンプトを作ることもあります。
 仕上げ（Finishing touches）とは、プロンプトを自分の好きなように仕上げるために、最終的に追加するもののことです。
-例えば、よりアーティスティックなイメージにしたい場合は、アートステーションで流行っている「trending on artstation」（www.artstation.com）を追加します。
-よりリアルなライティングを追加したい場合は、「Unreal Engine」を追加します。何を加えてもいいのですが、以下に例を挙げます。
+例えば、よりアーティスティックなイメージにしたい場合は、アートステーションで流行っている「@<tt>{trending on artstation}」（www.artstation.com）を追加します。
+よりリアルなライティングを追加したい場合は、「@<tt>{Unreal Engine}」を追加します。何を加えてもいいのですが、以下に例を挙げます。
 
-高精細「Highly detailed」、シュールレアリズム「surrealism」、アートステーションのトレンド「trending on art station」、トライアド配色（色相環を使った3角配色のこと）「triadic color scheme」、スムーズ「smooth」、シャープフォーカス「sharp focus」、マット「matte」、エレガント「elegant」、今まで見た中で最も美しい画像「the most beautiful image ever seen」、イラスト「illustration」、デジタルペイント「digital paint」、暗い「dark」、陰鬱「gloomy」、「octane render」（ Cinema4D や Blender に使われている Otoy社製の高品質レンダリングエンジン）、8K、4K、ウォッシュドカラー「washed colors」、シャープ「sharp」、ドラマチックライティング「dramatic lighting」、美しい「beautiful」、ポストプロセス「post processing」、今日の写真「picture of the day」、環境照明「ambient lighting」、叙事詩的構図「epic composition」……。
+高精細「@<tt>{Highly detailed}」、シュールレアリズム「@<tt>{surrealism}」、アートステーションのトレンド「@<tt>{trending on art station}」、トライアド配色（色相環を使った3角配色のこと）「@<tt>{triadic color scheme}」、スムーズ「@<tt>{smooth}」、シャープフォーカス「@<tt>{sharp focus}」、マット「@<tt>{matte}」、エレガント「@<tt>{elegant}」、今まで見た中で最も美しい画像「@<tt>{the most beautiful image ever seen}」、イラスト「@<tt>{illustration}」、デジタルペイント「@<tt>{digital paint}」、暗い「@<tt>{dark}」、陰鬱「@<tt>{gloomy}」、「@<tt>{octane render}」（ Cinema4D や Blender に使われている Otoy社製の高品質レンダリングエンジン）、@<tt>{8K}、@<tt>{4K}、ウォッシュドカラー「@<tt>{washed colors}」、シャープ「@<tt>{sharp}」、ドラマチックライティング「@<tt>{dramatic lighting}」、美しい「@<tt>{beautiful}」、ポストプロセス「@<tt>{post processing}」、今日の写真「@<tt>{picture of the day}」、環境照明「@<tt>{ambient lighting}」、叙事詩的構図「@<tt>{epic composition}」……。
 
 
 ==== 5. まとめ
@@ -411,10 +399,10 @@ Cfg Scaleを最大値20（=揺らぎなし） にして、Stepsを最小の 10 �
 他は全て同じパラメータ, Seed = 1457915964。
 
 
- * 【Galaxy】「A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ」(起動時のデフォルト)
+ * 【Galaxy】「@<tt>{A dream of a distant galaxy, by Caspar David Friedrich, matte painting trending on artstation HQ}」(起動時のデフォルト)
 Stepsが増えると細部の描写が細かくなる。画の派手さ（星の輝き）は減る、脚の本数や山の描写は謎。
 
- * 【Miku】「Dancing Hatsune Miku in Minecraft Trending on pixiv HQ」
+ * 【Miku】「@<tt>{Dancing Hatsune Miku in Minecraft Trending on pixiv HQ}」
 Stepsが少なすぎるとボケ過ぎ。右上のハートはなぜ生まれたのか?
 
 
@@ -467,7 +455,7 @@ Imagenの論文で提案されているように、事前に学習した固定�
 ==== Stable Diffusion を Google Colab で動かすサンプル
 
 詳細は、上記のマニュアルを読んでいただければよいと思いますが、試せるサンプルコードを紹介しておきます。
-
+実際の Colab でのコードブロックは丸コピではなく、ステップごとに入力して確認していくことをお勧めします。
 
 //list[Stable Diffusion][Stable Diffusion を Google Colab で動かすサンプル][Python]{
 # インストール
@@ -492,7 +480,7 @@ seed = 1317567826
 generator = torch.Generator("cuda").manual_seed(seed)
 # プロンプト。
 prompt = "playing hatsune miku in minecraft trending on Pixiv HQ"
-# 保存場所。Google Driveが使えます
+# 保存場所。Google Driveが使えます。使いやすいディレクトリを作って指定。
 path = f"/content/drive/MyDrive/StableDiffusion/"
 with torch.autocast("cuda"):
   image = pipe(prompt, generator=generator)["sample"][0]
@@ -520,11 +508,26 @@ Google Colalbo上で特徴だけを残して探究するパイプラインがで
 
 
 
+=== Diffusion モデルの謎と可能性
+ところで Stable Diffusion の Diffusionモデル、「なぜこのガウスノイズの除去で画像が生成されるのか？」という点については、別途研究されていて、わかっていないことも多かったようです。
+
+Diffusionモデルはガウスノイズを追加して画像を劣化させる処理と、そのノイズを除去する処理の繰り返しによって成立しています。
+この工程はランジュバン方程式 (Langevin equation) というブラウン運動の説明にも使われる確率微分方程式で説明されていますが、このノイズ追加工程は「正規分布に従うノイズ以外」でも動作することが報告されています。
+例えば Cold Diffusion モデル@<fn>{ColdDiffusion}です。正規分布に従うガウスノイズでしか動作しないはずの Diffusion モデルが、ImageNet-C というブラーや降雪など各種のノイズを加えたデータセットでも動作することが確認されています。
+
+完全なガウスノイズからヒントだけで画像が生成できるのだから、もう驚くことはないかもしれませんが、
+そもそも、Diffusionモデルがランダムな拡散である必要すらない可能性もあるということで、
+より制御された絵作りに利用できるだけでなく、ボカシやモザイクの除去などにも影響がある話ですし、(これは筆者の空想ですが)それらの隠蔽処理のもっともらしい復元において、任意の画像を差し込むことすらできる可能性があります。
+
+//image[StableDiffusion_ColdDiffusion][Cold Diffusion を書いた Tom Goldstein 先生の論文紹介ツイートより。ノイズ付加、ブラー以外に、雪やアニマル化が加えられているにもかかわらず逆工程で復元できている。 https://twitter.com/tomgoldsteincs/status/1562503869984559104]
+
+//footnote[ColdDiffusion][Cold Diffusion: Inverting Arbitrary Image Transforms Without Noise, https://arxiv.org/abs/2208.09392]
+
 == 結論：人気絵師になって分かったこと
 
 === まずはミュシャ風の少女画を描いて表現を探ってみる
 
-まずはアルフォンス・ミュシャ「by Alfons Maria Mucha」もしくは「Mucha」を追加してみましょう。
+まずはアルフォンス・ミュシャ「@<tt>{by Alfons Maria Mucha}」もしくは「@<tt>{Mucha}」を追加してみましょう。
 ミュシャは20世紀初頭に活躍したアール・ヌーヴォーを代表するチェコ出身のフランスの画家で、多くのポスター、装飾パネル、カレンダー等を制作しました。
 イラストレーションとデザインの両面で日本のグラフィックデザインには大きな影響を与えています。
 ミュシャの作品は星、宝石、花、植物などの様々な概念を女性の姿を用いて表現するスタイルと、背景に華麗なステンドグラスのフレームような曲線を多用したフレームのようなデザインが特徴です。
@@ -535,8 +538,8 @@ Google Colalbo上で特徴だけを残して探究するパイプラインがで
 前述の公式ガイドの通り、対象，スタイル，アーティスト，仕上げを選んでいきますが、ミュシャはレイアウトやポージングに影響がありますが、画風は何も指定しないとミュシャのグラフィックアートっぽくなります。
 仕上げに有効なウェブサイトを探し出すのが大事です。
 
-筆者が見つけた ArtStation 以外のオススメの（しかしテクニック的にあまり広く教えたくはない）「trending on」は、「pixiv」と「figma」です。
-「pixivも学習してるんだ、すごいな！」という感動もありましたが、「figma」に至っては以下の2つがあるわけですが、きっちりフィギュアのほうが学習されています。
+筆者が見つけた ArtStation 以外のオススメの（しかしテクニック的にあまり広く教えたくはない）「@<tt>{trending on}」は、「@<tt>{pixiv}」と「@<tt>{figma}」です。
+「pixivも学習してるんだ、すごいな！」という感動もありました。それ以上に「@<tt>{figma}」に至っては以下の2つのサイトがあるのですが、きっちりフィギュアのほうが学習されています。
 
  * コラボレーションインターフェイスデザインツール「Figma」 https://www.figma.com/
  * マックスファクトリー可動アクションフィギュアシリーズ「figma」　https://www.figma.jp/ 
@@ -552,13 +555,13 @@ Google Colalbo上で特徴だけを残して探究するパイプラインがで
 === 不可能な絵を描いてみる
 
 その他、演出のためのブラーや光、フォーカスなども指定できます。
-「focus blur」，「pastel」など、新しい仕上げを見つけると徹夜になります。
+「@<tt>{focus blur}」，「@<tt>{pastel}」など、新しい仕上げを見つけると徹夜になります。
 
-「歴史上存在しない絵」としては、「北斎風新幹線」などは「Shinkansen by hokusai」で描けます。
+「歴史上存在しない絵」としては、「北斎風新幹線」などは「@<tt>{Shinkansen by hokusai}」で描けます。
 しかし「人類がまだ描いたことがない絵」は描けるでしょうか、具体的には先史時代、人類最初期の壁画であるラスコー洞窟に初音ミクを描いてみる挑戦をしました。
 呪文としては以下のような感じになります。
 
- * "Illustrated brown black Hatsune Miku is dancing with deer and ox in galaxy, by "Grotte de Lascaux", aged prehistoric wall painting strong paint brush yellow, brown, black. trending on national geographic, wide camera"
+ * @<tt>{"Illustrated brown black Hatsune Miku is dancing with deer and ox in galaxy, by "Grotte de Lascaux", aged prehistoric wall painting strong paint brush yellow, brown, black. trending on national geographic, wide camera"}
 
 「初音ミクが鹿や牛と一緒に銀河系で踊っているイラストの茶色と黒、『ラスコー洞窟』による先史時代の壁画で、黄色、茶色、黒の強い絵筆を使用！」
 
@@ -601,6 +604,8 @@ Google Colalbo上で特徴だけを残して探究するパイプラインがで
 
 === 人気絵師は大変だ
 
+//image[StableDiffusion_Pixiv20220905][筆者の pixiv アクセス状況。みなさまにご高覧頂き本当にありがとうございます。]
+
 さてAI画像生成を使って人気絵師になってはみたものの、これが意外と大変でした。
 
 pixiv の通知は鳴りやみません。自分で手で描いた時は、何時間かかって描いた新作も30秒ぐらいで「新作リスト」から消えて行ってしましますから、それに比べれば幸せでしょう。
@@ -612,6 +617,7 @@ pixiv の通知は鳴りやみません。自分で手で描いた時は、何�
 「おもしろいだろうな」という気持ちで描いても、「自分はそのジャンル極めたくない」と気付いてしまうこともあります。
 
 「描きたいものを描く」のと「求められて描く」のは異質なものです。
+特に「初音ミク」は人気です。
 例えば「ミク × ガンダムコラボ」が需要あることはわかりました。
 
 でもそれだけでは描き続けられません。
